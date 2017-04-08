@@ -15,6 +15,14 @@
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
+	
+	<!-- accordion -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- accordion -->
+  
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
@@ -52,7 +60,7 @@
 	}
 	$(function(){
 
-		$(".getUser").on(function(){
+		/* $(".getUser").on(function(){
 				
 			//self.location="/user/getUser?userId="+$(this).attr("sendValue");
 			var userId=$(this).attr("userId").trim();
@@ -97,7 +105,7 @@
 			
 			
 			
-		});
+		}); */
 		
 		$("td i").on("click",function(){
 			$("td i.glyphicon glyphicon-ok").css("color","green");
@@ -124,8 +132,7 @@
 							
 					});
 					
-						
-					var displayValue = "<h3>"
+					var displayValue = "<h7>"
 							+"물품번호       : "+JSONData.purchase.purchaseProd.prodNo+"<br/>"
 							+"구매자아이디 : "+JSONData.purchase.buyer.userId+"<br/>"
 							+"구매방법       : ";
@@ -144,18 +151,39 @@
 							+"주문일          : "+JSONData.purchase.orderDate+"<br/>";
 							//displayValue+="<input id='update' type='button' value='수정'/>";
 							displayValue+="<input id='detail' type='button' value='상세보기'/>";
-							displayValue+="</h3>";
+							displayValue+="</h7>";
 							
 					//Debug...									
 					//alert(displayValue);
-					$("h3").remove();
+					$("div h7").remove();
 					$( "#"+tranNo+"" ).html(displayValue);
 				}
 				
 				}		
 			)
 			
-			
+			var displayValue = "<div id='accordion'>"
+				+"<h7>$()</h7>"
+				+"물품번호       : "+JSONData.purchase.purchaseProd.prodNo+"<br/>"
+				+"구매자아이디 : "+JSONData.purchase.buyer.userId+"<br/>"
+				+"구매방법       : ";
+					if(JSONData.purchase.paymentOption==1){
+					displayValue+=JSONData.purchase.paymentOption='현금결제';
+					
+				}else{
+					displayValue+=JSONData.purchase.paymentOption='신용결제';
+				}
+				displayValue+="<br/>"
+				+"구매자이름    : "+JSONData.purchase.receiverName+"<br/>"
+				+"구매자연락처 : "+JSONData.purchase.receiverPhone+"<br/>"
+				+"구매자주소    : "+JSONData.purchase.dlvyAddr+"<br/>"
+				+"구매요청사항 : "+JSONData.purchase.dlvyRequest+"<br/>"
+				+"배송희망일    : "+JSONData.purchase.dlvyDate+"<br/>"
+				+"주문일          : "+JSONData.purchase.orderDate+"<br/>";
+				//displayValue+="<input id='update' type='button' value='수정'/>";
+				displayValue+="<input id='detail' type='button' value='상세보기'/>";
+				displayValue+="</h7>"
+							  +"</div>";
 		});
 		
 		$("td span.updateTranCode").on("click",function(){
